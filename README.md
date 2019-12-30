@@ -15,14 +15,8 @@ Once the Python environment is set up, simply run To install the project's requi
 
 `pip install -r requirements.txt`
 
-Run the tests
 
-`pytest`
-
-And you are done.
-
-## Training
-### Preparation
+## Preparation
 #### Data
 Download the training data: [The Movies Dataset](https://www.kaggle.com/rounakbanik/the-movies-dataset/data)
 
@@ -33,14 +27,25 @@ Download https://tfhub.dev/google/universal-sentence-encoder-large/5?tf-hub-form
 
 Extract it and place it under the folder `model/encoder/`
 
-After extracting data and the encoder, your new folders should look like this:
+#### Trained model
+Download a trained model from [Google Drive](https://drive.google.com/open?id=13vMbEIbPnvGjawAuoBRTA3gtBC629Nt0)
+
+Again, unpack the files under `model/trained_model`. The folder structure should look like
+
+
+After extracting data, encoder and the trained model, your new folders should look like this:
 
 - model
   - encoder
-    - tfhub_module.pb
     - variables
     - saved_model.pb
     - assets
+  - trained_model
+    - saved_model.pb
+    - assets
+    - variables
+    - reverse_dict.pkl
+    - hyperparams.pkl
 
 - data
   - the-movies-dataset
@@ -51,6 +56,8 @@ After extracting data and the encoder, your new folders should look like this:
     - movies_metadata.csv
     - ratings.csv
     - ratings_small.csv
+
+
 
 ### Pre compute features
 Prepare data and extract vectors for the single reviews by running 
