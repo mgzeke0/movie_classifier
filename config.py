@@ -23,6 +23,14 @@ GENRES = {
     10770: 'TV Movie',
 }
 
+HYPERPARAMS = {
+    'num_units': 310,
+    'lr': 0.004,
+    'epochs': 200,
+    'batch_size': 768,
+    'threshold': 0.3
+}
+
 ENCODER_PATH = 'model/encoder/'
 RAW_DATASET_PATH = 'data/the-movies-dataset/movies_metadata.csv'
 DATASET_PATH = 'data/training/movies.csv'
