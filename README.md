@@ -86,11 +86,13 @@ Now you can run tests
 
 Prepare data and extract vectors for the single reviews by running
 
-`python -m train.prepare_dataset`
+`python -m train.prepare_dataset --vectors`
 
 This script first creates labels that are in a suitable format for ML models, then pre-computes and saves on disk a vector for each movie overview. The vectors are computed from the Universal Sentence Encoder downloaded before.
 
-You can find the pre-computed vectors [here](https://drive.google.com/open?id=1OiCfqyvJ43VSfJdkmVTl5qNV7tJcmVRc) to save time.
+You can find the pre-computed vectors [here](https://drive.google.com/open?id=1OiCfqyvJ43VSfJdkmVTl5qNV7tJcmVRc) to save time. 
+The folder `vectors` should be placed under `data/training/`
+Then just run `python -m train.prepare_dataset --vectors`
 
 ### Run Training
 
@@ -110,9 +112,11 @@ Even though the values may vary a little.
 
 To perform a small random search for parameters, run
 
-`python -m train.run_training --randomsearch=1`
+`python -m train.run_training --randomsearch`
 
-The script will also save the model under `model/trained_model/` by default. Use `python -m train.run_training --save=0` to avoid saving it.
+The script will also save the model under `model/trained_model/`. 
+
+Pass the flag --save `python -m train.run_training --save` to save it.
 
 
 ## Inference
