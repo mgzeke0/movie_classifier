@@ -17,7 +17,7 @@ To be able to run it, please read the whole file and follow all the Set up and P
 
 Clone the repo (you may need to install git).
 
-`git clone https://github.com/mgzeke0/movie_classifier.git`
+`git clone https://github.com/mgzeke0/movie_classifier.git && cd movie_classifier`
 
 ### Python environment
 
