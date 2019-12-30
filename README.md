@@ -23,7 +23,7 @@ Download the training data: [The Movies Dataset](https://www.kaggle.com/rounakba
 extract it and place it under the folder `data/the-movies-dataset/`.
 
 #### Embedding model
-Download https://tfhub.dev/google/universal-sentence-encoder-large/5?tf-hub-format=compressed
+Download [Universal Sentence Encoder large](https://tfhub.dev/google/universal-sentence-encoder-large/5?tf-hub-format=compressed)
 
 Extract it and place it under the folder `model/encoder/`
 
@@ -57,7 +57,9 @@ After extracting data, encoder and the trained model, your new folders should lo
     - ratings.csv
     - ratings_small.csv
 
+Now you can run tests
 
+`pytest`
 
 ### Pre compute features
 Prepare data and extract vectors for the single reviews by running 
@@ -71,9 +73,22 @@ After creating the pre computed vectors, train an additional model that classifi
 
 `python -m train.run_training`
 
-To perform a small random search for parameters and replicate my results. The script will also save the model under `model/trained_model/`
+To replicate my results. You should get as output 
 
-Otherwise use the function `train_one_model` for a single training.
+```
+Val data f1 score: 0.55821985
+Val data f1 score tuned: 0.6113644
+Test data f1 score: 0.5571354
+Test data f1 score tuned: 0.6085857
+```
+Even though the values may vary a little.
+
+To perform a small random search for parameters, run
+
+`python -m train.run_training --randomsearch=1`
+
+The script will also save the model under `model/trained_model/` by default. Use `python -m train.run_training --save=0` to avoid saving it.
+
 
 ## Inference
 There are 3 ways to do inference:
