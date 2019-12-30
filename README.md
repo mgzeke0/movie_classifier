@@ -116,9 +116,15 @@ The script will also save the model under `model/trained_model/` by default. Use
 ## Inference
 
 There are 3 ways to do inference:
-1) Build and run a Docker image (also requires Python3.6)
+1) Run the command line application
 2) Run a REST server and call it with a Python client
-3) Run the command line application
+3) Build and run a Docker image
+
+### Python command line
+
+Run the command specifying a title and an overview.
+
+`python -m movie_classifier --title TITLE --overview OVERVIEW`
 
 ### REST Service
 
@@ -129,13 +135,6 @@ Run
 And in a separate window
 
 `python -m rest_service.client_rest`
-
-
-### Python command line
-
-Run the command specifying a title and an overview.
-
-`python -m movie_classifier --title TITLE --overview OVERVIEW`
 
 
 ### Docker image
