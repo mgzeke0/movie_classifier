@@ -1,6 +1,6 @@
 FROM python:3.6-slim
 ARG PORT=8081
-RUN apt update && apt install --yes gcc
+RUN apt-get update && apt-get install --yes gcc
 #COPY rest_service/ /service/rest_service/
 #COPY model/ /service/model/
 #COPY serve.py config.py requirements.txt /service/
@@ -10,5 +10,4 @@ COPY . /service
 WORKDIR /service
 ENV SERVICE_PORT=$PORT
 EXPOSE $SERVICE_PORT
-# ENTRYPOINT ["uvicorn", "rest_service.server_rest:app", "--host", "0.0.0.0", "--port", PORT]
 ENTRYPOINT uvicorn rest_service.server_rest:app --host "0.0.0.0" --port $SERVICE_PORT
