@@ -1,3 +1,5 @@
+import os
+
 import pandas as pd
 
 import pytest
@@ -30,9 +32,9 @@ def test_convert_dataset(mock_data, tmpdir):
 
     # Prepare a temporary file to load
     datapath = tmpdir.mkdir("data")
-    dataframe.to_csv(datapath + 'data.csv', index=None)
-    convert_dataset(path=datapath + 'data.csv', out_data_path=datapath, genres_dict=genres_dict)
-    data = pd.read_csv(datapath + 'movies.csv')
+    dataframe.to_csv(os.path.join(datapath, 'data.csv'), index=None)
+    convert_dataset(path=os.path.join(datapath, 'data.csv'), out_data_path=datapath, genres_dict=genres_dict)
+    data = pd.read_csv(os.path.join(datapath, 'movies.csv'))
     assert data['genres_list'].apply(eval).tolist()[0] == [53, 27]
 
 
@@ -40,6 +42,6 @@ def test_create_features(mock_data, tmpdir):
     dataframe, genres_dict = mock_data
 
     # Prepare a temporary file to load
-    datapath = tmpdir.mkdir("data/")
-    dataframe.to_csv(datapath + 'movies.csv', index=None)
+    datapath = tmpdir.mkdir("data")
+    dataframe.to_csv(os.path.join(datapath, 'movies.csv'), index=None)
     assert compute_features(str(datapath), datapath, save_to_disk=False)

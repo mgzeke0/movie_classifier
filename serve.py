@@ -1,3 +1,4 @@
+import os
 import pickle
 
 import tensorflow as tf
@@ -11,8 +12,8 @@ class ModelServer:
     def __init__(self, ENCODER_PATH, TRAINED_MODEL_PATH):
         self.encoder = tf.saved_model.load(ENCODER_PATH)
         self.trained_model = tf.saved_model.load(TRAINED_MODEL_PATH)
-        self.reverse_dict = pickle.load(open(TRAINED_MODEL_PATH + 'reverse_dict.pkl', 'rb'))
-        self.threshold = pickle.load(open(TRAINED_MODEL_PATH + 'hyperparams.pkl', 'rb'))['threshold']
+        self.reverse_dict = pickle.load(open(os.path.join(TRAINED_MODEL_PATH, 'reverse_dict.pkl'), 'rb'))
+        self.threshold = pickle.load(open(os.path.join(TRAINED_MODEL_PATH, 'hyperparams.pkl'), 'rb'))['threshold']
 
     def predict(self, description):
         f = self.encoder(tf.constant(description))

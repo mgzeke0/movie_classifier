@@ -1,4 +1,5 @@
 import json
+import os
 import pickle
 
 import numpy as np
@@ -10,7 +11,7 @@ from train.models_class import MultiLabelClassifier
 
 
 def load_batches(ids):
-    return np.array([np.load(FEATURES_PATH + str(i) + '.npy') for i in ids])
+    return np.array([np.load(os.path.join(FEATURES_PATH, str(i) + '.npy')) for i in ids])
 
 
 def one_hot(labels, num_classes, labels_list):
@@ -133,7 +134,7 @@ def train_one_model(train_data, val_data, test_data, train_labels, val_labels, t
 
         # Save hyperparameters dictionary
         hyperparams['threshold'] = best_thresh
-        pickle.dump(hyperparams, open(TRAINED_MODEL_PATH + 'hyperparams.pkl', 'wb'))
+        pickle.dump(hyperparams, open(os.path.join(TRAINED_MODEL_PATH , 'hyperparams.pkl'), 'wb'))
 
     # Return the validation loss at the best epoch, the tuned validation f1 score and the optimized threshold
     return best_val_loss, tuned_val_f1_score, best_thresh

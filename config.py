@@ -1,3 +1,6 @@
+import os
+
+
 # Define available genres for training
 
 GENRES = {
@@ -31,10 +34,10 @@ HYPERPARAMS = {
     'threshold': 0.3
 }
 
-ENCODER_PATH = 'model/encoder/'
-RAW_DATASET_PATH = 'data/the-movies-dataset/movies_metadata.csv'
-DATASET_PATH = 'data/training/'
-FEATURES_PATH = 'data/training/vectors/'
-TRAINED_MODEL_PATH = 'model/trained_model/'
+ENCODER_PATH = os.path.join('model','encoder')
+RAW_DATASET_PATH = os.path.join('data', 'the-movies-dataset', 'movies_metadata.csv')
+DATASET_PATH = os.path.join('data', 'training')
+FEATURES_PATH = os.path.join('data', 'training' 'vectors')
+TRAINED_MODEL_PATH = os.path.join('model', 'trained_model')
 RANDOM_SEED = 42
 PORT = 8081

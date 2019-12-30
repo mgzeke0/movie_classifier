@@ -49,7 +49,7 @@ def convert_dataset(path, out_data_path, genres_dict):
     # Drop movies without supported genres
     data.dropna(inplace=True, subset=['overview', 'genres_list'])
     os.makedirs(out_data_path, exist_ok=True)
-    data.to_csv(out_data_path + 'movies.csv', index=None)
+    data.to_csv(os.path.join(out_data_path , 'movies.csv'), index=None)
     assert len(data[pd.isna(data['genres_list'])]) == 0
 
 
@@ -59,7 +59,7 @@ def compute_features(data_path, features_path, save_to_disk=True):
     These features are then used for transfer learning
     In a downstream classification task
     """
-    data = pd.read_csv(data_path + 'movies.csv')
+    data = pd.read_csv(os.path.join(data_path, 'movies.csv'))
     # Instead of installing TensorFlow hub, download a Universal Sentence Encoder model
     encoder = get_encoder()
 
@@ -72,7 +72,7 @@ def compute_features(data_path, features_path, save_to_disk=True):
         ids = data.id[i:i + encode_batch_size].tolist()
         if save_to_disk:
             for id, f in zip(ids, batch_features):
-                np.save(features_path + str(id), f.numpy())
+                np.save(os.path.join(features_path, str(id)), f.numpy())
         result.extend(batch_features)
     print('Features created')
     return result
