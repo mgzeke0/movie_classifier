@@ -1,0 +1,7 @@
+data/
+tests/
+train/
+.ipynb_checkpoints
+.pytest_cache
+client.py
+movie_classifier.py
