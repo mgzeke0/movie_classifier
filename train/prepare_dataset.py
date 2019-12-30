@@ -61,16 +61,16 @@ def compute_features(data_path, features_path, save_to_disk=True):
 
     # Pre compute vector features
     encode_batch_size = 128
-    f = []
+    result = []
     for i in tqdm(range(0, len(data), encode_batch_size), total=int(len(data)/encode_batch_size)):
-        batch_features = encoder.signatures['default'](tf.constant(data.overview[i:i + encode_batch_size].tolist()))['default']
+        batch_features = encoder(tf.constant(data.overview[i:i + encode_batch_size].tolist()))
         ids = data.id[i:i + encode_batch_size].tolist()
         if save_to_disk:
             for id, f in zip(ids, batch_features):
                 np.save(features_path + str(id), f.numpy())
-        f.extend(batch_features)
+        result.extend(batch_features)
     print('Features created')
-    return f
+    return result
 
 
 if __name__ == '__main__':

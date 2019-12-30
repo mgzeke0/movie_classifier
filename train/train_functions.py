@@ -59,7 +59,6 @@ def train_one_model(train_data, val_data, test_data, train_labels, val_labels, t
         'lr': learning rate for Adam
         'epochs': number of max epochs
         'batch_size': number of mini batch examples
-        'early_stop_delta': absolute value under which no progress in validation loss is considered
 
     :param train_data: Training features (batch_size, dim)
     :param val_data: Validation features (batch_size, dim)
@@ -90,7 +89,7 @@ def train_one_model(train_data, val_data, test_data, train_labels, val_labels, t
 
     # Define an early stopping criterion
     early_stopping = tf.keras.callbacks.EarlyStopping(monitor='val_loss', patience=10, restore_best_weights=True,
-                                                      min_delta=hyperparams['early_stop_delta'])
+                                                      min_delta=0.0001)
 
     epochs = hyperparams['epochs']
 
@@ -114,10 +113,15 @@ def train_one_model(train_data, val_data, test_data, train_labels, val_labels, t
         if s > best_score:
             best_score = s
             best_thresh = t
-    tuned_val_fi_score = f1_score(val_labels, val_predictions, thresh=best_thresh).numpy()
+
+    # Compute f1 scores with tuned threshold
+    tuned_val_f1_score = f1_score(val_labels, val_predictions, thresh=best_thresh).numpy()
+    tuned_test_f1_score = f1_score(test_labels, trainable_model.predict(test_data), thresh=best_thresh).numpy()
     if verbose != 0:
         print('Val data f1 score:', f1_score(val_labels, val_predictions).numpy())
-        print('Val data f1 score tuned:', tuned_val_fi_score)
+        print('Val data f1 score tuned:', tuned_val_f1_score)
+        print('Test data f1 score:', f1_score(test_labels, trainable_model.predict(test_data)).numpy())
+        print('Test data f1 score tuned:', tuned_test_f1_score)
 
     # Prepare return values
     e = early_stopping.stopped_epoch
@@ -132,7 +136,7 @@ def train_one_model(train_data, val_data, test_data, train_labels, val_labels, t
         pickle.dump(hyperparams, open(TRAINED_MODEL_PATH + 'hyperparams.pkl', 'wb'))
 
     # Return the validation loss at the best epoch, the tuned validation f1 score and the optimized threshold
-    return best_val_loss, tuned_val_fi_score, best_thresh
+    return best_val_loss, tuned_val_f1_score, best_thresh
 
 
 def random_search(train_data, val_data, test_data, train_labels, val_labels, test_labels):
@@ -155,7 +159,6 @@ def random_search(train_data, val_data, test_data, train_labels, val_labels, tes
         'lr': np.random.random_sample(size=random_combinations) * (0.1 - 0.000001) + 0.000001,
         'epochs': [200],
         'batch_size': np.random.choice([16, 32, 64, 128, 256, 512, 768, 1024], size=random_combinations),
-        'early_stop_delta': np.random.random_sample(size=random_combinations) * (0.1 - 0.000001) + 0.000001,
     }
     results = {
         'val_loss': [],
