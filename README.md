@@ -15,6 +15,10 @@ To be able to run it, please read the whole file and follow all the Set up and P
 
 ## Set up
 
+Clone the repo (you may need to install git).
+
+`git clone https://github.com/mgzeke0/movie_classifier.git`
+
 ### Python environment
 
 - This project was developed using Python 3.6 with Anaconda (Miniconda). Install it if you don't have it https://docs.conda.io/projects/conda/en/latest/user-guide/install/
@@ -22,10 +26,11 @@ To be able to run it, please read the whole file and follow all the Set up and P
 - (Optional) I recommend using a virtual environment, I use Anaconda, but if you didn't install it you can use Virtualenv.
     - With Anaconda, run `conda create -n movie_classifier python=3.6` and `conda activate movie_classifier`
 
-Once the Python environment is set up, simply run To install the project's requirements
+Once the Python environment is set up, simply run
 
 `pip install -r requirements.txt`
 
+To install the project's requirements
 
 ## Preparation
 
