@@ -1,4 +1,5 @@
 import argparse
+import os
 import pickle
 
 import pandas as pd
@@ -19,7 +20,7 @@ if __name__ == '__main__':
     parser.add_argument('--save', help='Save the model', action='store_true')
 
     args = parser.parse_args()
-    data = pd.read_csv(DATASET_PATH + 'movies.csv')
+    data = pd.read_csv(os.path.join(DATASET_PATH, 'movies.csv'))
     data['genres_list'] = data['genres_list'].apply(eval)
     labels, reverse_one_hot_dict = one_hot(data['genres_list'], len(GENRES), GENRES.keys())
 
