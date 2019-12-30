@@ -84,11 +84,13 @@ Now you can run tests
 
 ### Pre compute features
 
-Prepare data and extract vectors for the single reviews by running 
+Prepare data and extract vectors for the single reviews by running
 
 `python -m train.prepare_dataset`
 
 This script first creates labels that are in a suitable format for ML models, then pre-computes and saves on disk a vector for each movie overview. The vectors are computed from the Universal Sentence Encoder downloaded before.
+
+You can find the pre-computed vectors [here](https://drive.google.com/open?id=1OiCfqyvJ43VSfJdkmVTl5qNV7tJcmVRc) to save time.
 
 ### Run Training
 
