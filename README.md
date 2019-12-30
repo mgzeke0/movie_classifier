@@ -82,6 +82,7 @@ Now you can run tests
 
 `pytest`
 
+## Training
 ### Pre compute features
 
 Prepare data and extract vectors for the single reviews by running
