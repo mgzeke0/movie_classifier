@@ -19,7 +19,7 @@ if __name__ == '__main__':
     parser.add_argument('--save', type=bool, help='Whether to save the model when the training finishes', default=True)
 
     args = parser.parse_args()
-    data = pd.read_csv(DATASET_PATH)
+    data = pd.read_csv(DATASET_PATH + 'movies.csv')
     data['genres_list'] = data['genres_list'].apply(eval)
     labels, reverse_one_hot_dict = one_hot(data['genres_list'], len(GENRES), GENRES.keys())
 

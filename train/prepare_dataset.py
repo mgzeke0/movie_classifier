@@ -1,11 +1,13 @@
 #!/usr/bin/env python
 # coding: utf-8
+import os
 
 import numpy as np
 
 import pandas as pd
 
 import tensorflow as tf
+
 from tqdm import tqdm
 
 from config import FEATURES_PATH, GENRES, DATASET_PATH, RAW_DATASET_PATH
@@ -45,7 +47,8 @@ def convert_dataset(path, out_data_path, genres_dict):
     data = data.loc[:, ['id', 'title', 'overview', 'genres', 'genres_list']]
     # Drop movies without supported genres
     data.dropna(inplace=True, subset=['overview', 'genres_list'])
-    data.to_csv(out_data_path, index=None)
+    os.makedirs(out_data_path, exist_ok=True)
+    data.to_csv(out_data_path + 'movies.csv', index=None)
     assert len(data[pd.isna(data['genres_list'])]) == 0
 
 
@@ -55,13 +58,14 @@ def compute_features(data_path, features_path, save_to_disk=True):
     These features are then used for transfer learning
     In a downstream classification task
     """
-    data = pd.read_csv(data_path)
+    data = pd.read_csv(data_path + 'movies.csv')
     # Instead of installing TensorFlow hub, download a Universal Sentence Encoder model
     encoder = get_encoder()
 
     # Pre compute vector features
     encode_batch_size = 128
     result = []
+    os.makedirs(features_path, exist_ok=True)
     for i in tqdm(range(0, len(data), encode_batch_size), total=int(len(data)/encode_batch_size)):
         batch_features = encoder(tf.constant(data.overview[i:i + encode_batch_size].tolist()))
         ids = data.id[i:i + encode_batch_size].tolist()
