@@ -15,7 +15,7 @@ class ModelServer:
         self.threshold = pickle.load(open(TRAINED_MODEL_PATH + 'hyperparams.pkl', 'rb'))['threshold']
 
     def predict(self, description):
-        f = self.encoder.signatures['default'](tf.constant(description))['default']
+        f = self.encoder(tf.constant(description))
         predictions = self.trained_model(f)
         preds = tf.cast(tf.greater(predictions, self.threshold), tf.float32)
         genres = []
