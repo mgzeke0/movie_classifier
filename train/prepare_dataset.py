@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
+import argparse
 import os
 
 import numpy as np
@@ -78,5 +79,9 @@ def compute_features(data_path, features_path, save_to_disk=True):
 
 
 if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--vectors', action='store_true', help='Convert the movie overviews into vectors')
     convert_dataset(RAW_DATASET_PATH, DATASET_PATH, GENRES)
-    compute_features(DATASET_PATH, FEATURES_PATH)
+    args = parser.parse_args()
+    if args.vectors:
+        compute_features(DATASET_PATH, FEATURES_PATH)

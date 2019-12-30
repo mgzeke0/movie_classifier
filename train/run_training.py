@@ -15,8 +15,8 @@ tf.get_logger().setLevel('ERROR')
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--randomsearch', type=bool, help='Perform random search', default=False)
-    parser.add_argument('--save', type=bool, help='Whether to save the model when the training finishes', default=True)
+    parser.add_argument('--randomsearch', help='Perform random search', action='store_true')
+    parser.add_argument('--save', help='Save the model', action='store_true')
 
     args = parser.parse_args()
     data = pd.read_csv(DATASET_PATH + 'movies.csv')
