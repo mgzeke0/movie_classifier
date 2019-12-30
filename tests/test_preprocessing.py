@@ -31,8 +31,8 @@ def test_convert_dataset(mock_data, tmpdir):
     # Prepare a temporary file to load
     datapath = tmpdir.mkdir("data")
     dataframe.to_csv(datapath + 'data.csv', index=None)
-    convert_dataset(path=datapath + 'data.csv', out_data_path=datapath + 'data_preprocessed.csv', genres_dict=genres_dict)
-    data = pd.read_csv(datapath + 'data_preprocessed.csv')
+    convert_dataset(path=datapath + 'data.csv', out_data_path=datapath, genres_dict=genres_dict)
+    data = pd.read_csv(datapath + 'movies.csv')
     assert data['genres_list'].apply(eval).tolist()[0] == [53, 27]
 
 
@@ -41,5 +41,5 @@ def test_create_features(mock_data, tmpdir):
 
     # Prepare a temporary file to load
     datapath = tmpdir.mkdir("data/")
-    dataframe.to_csv(datapath + 'data.csv', index=None)
-    assert compute_features(str(datapath) + 'data.csv', datapath, save_to_disk=False)
+    dataframe.to_csv(datapath + 'movies.csv', index=None)
+    assert compute_features(str(datapath), datapath, save_to_disk=False)
