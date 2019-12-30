@@ -11,7 +11,7 @@ The Machine Learning model used is composed of 2 parts: a sentence encoder and a
 
 The inference part can be run in a single command line or as a REST server.
 
-To be able to run it, please read the whole file and follow all the Set up and Preparation sections.
+To be able to run it, please read the whole file and follow all the Set up and Preparation sections. This code was developed on Ubuntu 18.04.
 
 ## Set up
 
@@ -150,6 +150,8 @@ And in a separate window
 ### Docker image
 
 Install Docker https://docs.docker.com/install/
+
+(https://docs.docker.com/install/linux/linux-postinstall/) to run Docker without sudo.
 
 Build the Docker image running
 
