@@ -173,7 +173,7 @@ def random_search(train_data, val_data, test_data, train_labels, val_labels, tes
         for k, v in choice.items():
             hyperparams[k] = v[i % len(v)]
         print('Training with', hyperparams)
-        val_l, val_f1, thresh = train_one_model(train_data, val_data, test_data, train_labels, val_labels, test_labels, hyperparams)
+        val_l, val_f1, thresh = train_one_model(train_data, val_data, test_data, train_labels, val_labels, test_labels, hyperparams, save=False)
         results['val_loss'].append(val_l)
         results['val_f1'].append(val_f1)
         results['threshold'].append(thresh)
