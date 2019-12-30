@@ -93,7 +93,7 @@ This script first creates labels that are in a suitable format for ML models, th
 
 You can find the pre-computed vectors [here](https://drive.google.com/open?id=1OiCfqyvJ43VSfJdkmVTl5qNV7tJcmVRc) to save time. 
 The folder `vectors` should be placed under `data/training/`
-Then just run `python -m train.prepare_dataset --vectors`
+Then just run `python -m train.prepare_dataset` without the flag --vectors
 
 ### Run Training
 
@@ -115,9 +115,7 @@ To perform a small random search for parameters, run
 
 `python -m train.run_training --randomsearch`
 
-The script will also save the model under `model/trained_model/`. 
-
-Pass the flag --save `python -m train.run_training --save` to save it.
+Pass the flag --save `python -m train.run_training --save` to save it. The script will also save the model under `model/trained_model/`.
 
 
 ## Inference
