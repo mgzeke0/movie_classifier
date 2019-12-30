@@ -33,7 +33,7 @@ HYPERPARAMS = {
 
 ENCODER_PATH = 'model/encoder/'
 RAW_DATASET_PATH = 'data/the-movies-dataset/movies_metadata.csv'
-DATASET_PATH = 'data/training/movies.csv'
+DATASET_PATH = 'data/training/'
 FEATURES_PATH = 'data/training/vectors/'
 TRAINED_MODEL_PATH = 'model/trained_model/'
 RANDOM_SEED = 42
